@@ -19,6 +19,4 @@ public class RedissonManaged implements Managed {
     public void stop() throws Exception {
         redissonClient.shutdown();
     }
-
-
 }

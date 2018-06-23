@@ -21,7 +21,7 @@
             <artifactId>dropwizard-core</artifactId>
             <version>${dropwizard.version}</version>
             <exclusions>
-                <exclusion>  <!-- declare the exclusion here -->
+                <exclusion>
                     <groupId>com.fasterxml.jackson.core</groupId>
                     <artifactId>jackson-databind</artifactId>
                 </exclusion>
@@ -39,7 +39,7 @@
             <artifactId>commons-collections4</artifactId>
             <version>4.1</version>
             <exclusions>
-                <exclusion>  <!-- declare the exclusion here -->
+                <exclusion>
                     <groupId>com.fasterxml.jackson.core</groupId>
                     <artifactId>jackson-databind</artifactId>
                 </exclusion>

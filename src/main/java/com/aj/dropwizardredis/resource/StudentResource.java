@@ -4,7 +4,7 @@ import com.aj.dropwizardredis.cache.CacheConfigManager;
 import com.aj.dropwizardredis.domain.Student;
 import com.aj.dropwizardredis.service.StudentService;
 import com.codahale.metrics.annotation.Timed;
-import org.redisson.api.RMap;
+import org.redisson.api.RMapCache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,9 +23,9 @@ public class StudentResource {
     private static final Logger logger = LoggerFactory.getLogger(StudentResource.class);
 
     private static StudentService studentService;
-    private static RMap<String, Student> map;
+    private static RMapCache<String, Student> map;
 
-    public StudentResource(StudentService studentService, RMap<String, Student> map) {
+    public StudentResource(StudentService studentService, RMapCache<String, Student> map) {
         this.studentService = studentService;
         this.map = map;
     }

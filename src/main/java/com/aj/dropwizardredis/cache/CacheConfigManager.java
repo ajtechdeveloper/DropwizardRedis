@@ -3,9 +3,11 @@ package com.aj.dropwizardredis.cache;
 import com.aj.dropwizardredis.domain.Student;
 import com.aj.dropwizardredis.service.StudentService;
 import org.apache.commons.collections4.CollectionUtils;
-import org.redisson.api.RMap;
+import org.redisson.api.RMapCache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.concurrent.TimeUnit;
 
 public class CacheConfigManager {
 
@@ -19,12 +21,13 @@ public class CacheConfigManager {
 
     //Logic For Student Cache
     public Student getStudentDataFromCache(String key, StudentService studentService,
-                                           RMap<String, Student> map) {
+                                           RMapCache<String, Student> map) {
         try {
             Student student;
             if(CollectionUtils.isEmpty(map.keySet())){
                 student = studentService.getFromDatabase(key);
-                map.put(key, student);
+                //Cache will expire after 30 minutes
+                map.put(key, student, 30, TimeUnit.MINUTES);
             }
             else{
                 if(map.containsKey(key)){
@@ -32,7 +35,8 @@ public class CacheConfigManager {
                 }
                 else{
                     student = studentService.getFromDatabase(key);
-                    map.put(key, student);
+                    //Cache will expire after 30 minutes
+                    map.put(key, student,30, TimeUnit.MINUTES);
                 }
             }
             logger.info("All Entries in Student map: {}",map.readAllEntrySet());
@@ -40,8 +44,7 @@ public class CacheConfigManager {
         } catch (Exception e) {
             logger.error("Error Retrieving Elements from the Student Cache"
                     + e.getMessage());
+            return null;
         }
-        return null;
     }
-
 }
