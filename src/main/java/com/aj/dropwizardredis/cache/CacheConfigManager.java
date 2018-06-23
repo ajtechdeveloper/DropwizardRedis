@@ -21,25 +21,25 @@ public class CacheConfigManager {
 
     //Logic For Student Cache
     public Student getStudentDataFromCache(String key, StudentService studentService,
-                                           RMapCache<String, Student> map) {
+                                           RMapCache<String, Student> studentRMapCache) {
         try {
             Student student;
-            if(CollectionUtils.isEmpty(map.keySet())){
+            if(CollectionUtils.isEmpty(studentRMapCache.keySet())){
                 student = studentService.getFromDatabase(key);
                 //Cache will expire after 30 minutes
-                map.put(key, student, 30, TimeUnit.MINUTES);
+                studentRMapCache.put(key, student, 30, TimeUnit.MINUTES);
             }
             else{
-                if(map.containsKey(key)){
-                    student = map.get(key);
+                if(studentRMapCache.containsKey(key)){
+                    student = studentRMapCache.get(key);
                 }
                 else{
                     student = studentService.getFromDatabase(key);
                     //Cache will expire after 30 minutes
-                    map.put(key, student,30, TimeUnit.MINUTES);
+                    studentRMapCache.put(key, student,30, TimeUnit.MINUTES);
                 }
             }
-            logger.info("All Entries in Student map: {}",map.readAllEntrySet());
+            logger.info("All Entries in Student map: {}",studentRMapCache.readAllEntrySet());
             return student;
         } catch (Exception e) {
             logger.error("Error Retrieving Elements from the Student Cache"

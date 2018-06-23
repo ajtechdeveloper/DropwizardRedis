@@ -21,6 +21,6 @@ public class DropwizardRedisHealthCheckResource extends HealthCheck {
         if("DropwizardRedis".equalsIgnoreCase(appName)) {
             return Result.healthy();
         }
-        return Result.unhealthy("Basic Dropwizard Service is down");
+        return Result.unhealthy("DropwizardRedis Service is down");
     }
 }
