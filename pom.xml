@@ -9,7 +9,7 @@
 	<properties>
 		<dropwizard.version>1.3.4</dropwizard.version>
         <redisson.version>3.7.0</redisson.version>
-        <jackson.version>2.9.5</jackson.version>
+        <jackson.version>2.9.8</jackson.version>
         <jdk.version>1.8</jdk.version>
 		<packaging>jar</packaging>
 	</properties>
